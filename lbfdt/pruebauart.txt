@@ -1,0 +1,1 @@
+gcc -o prueba2 uart.c libfdt/*.c ; ./prueba2
