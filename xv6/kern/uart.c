@@ -142,12 +142,14 @@ void read_uart_registers_dt(void *fdt){
 
     AUX_UART_CLOCK = strtol(propiedad->data, NULL, 10);
 
+    cprintf("\n\n--------------------------\nREGISTROS: AUX_BASE 0x%x - AUX_UART_CLOCK:%d - AUX_ENABLES: 0x%x - AUX_MU_IO_REG: 0x%x - AUX_MU_LSR_REG: 0x%x\n", AUX_BASE, AUX_UART_CLOCK, AUX_ENABLES, AUX_MU_IO_REG, AUX_MU_LSR_REG);
+
     // printf("REGISTROS: AUX_BASE 0x%x - AUX_UART_CLOCK:%d - AUX_ENABLES: 0x%x - AUX_MU_IO_REG: 0x%x - AUX_MU_LSR_REG: 0x%x\n", AUX_BASE, AUX_UART_CLOCK, AUX_ENABLES, AUX_MU_IO_REG, AUX_MU_LSR_REG);
 
-    // for (int i = 0; i < 12; i++){
+    for (int i = 0; i < 12; i++){
 
-	// 	printf("\t%d: 0x%x\n", i, AUX_REGISTERS[i]);
-	// }
+		cprintf("\t%d: 0x%x\n", i, AUX_REGISTERS[i]);
+	}
 
 }
 

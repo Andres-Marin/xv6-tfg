@@ -2,6 +2,7 @@
 // #include <unistd.h>
 
 #include <stdint.h>
+
 #include "memlayout.h"
 #include "trap.h"
 #include "console.h"
@@ -48,7 +49,7 @@ in_user(void *s, size_t n)
  */
 int
 fetchstr(uint64_t addr, char **pp)
-{
+{   
     struct proc *p = thisproc();
     char *s;
     *pp = s = (char *)addr;

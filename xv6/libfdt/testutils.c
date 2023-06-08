@@ -291,9 +291,10 @@ void vg_prepare_blob(void *fdt, size_t bufsize)
 		size_struct = fdt_size_dt_struct(fdt);
 		size_struct = fdt_totalsize(fdt) - off_struct;
 
-	} else {
-		CONFIG("Bad magic on vg_prepare_blob()");
-	}
+	} 
+	// else {
+	// 	CONFIG("Bad magic on vg_prepare_blob()");
+	// }
 
 	// VALGRIND_MAKE_MEM_DEFINED(blob + off_memrsv, size_memrsv);
 	// VALGRIND_MAKE_MEM_DEFINED(blob + off_strings, size_strings);
@@ -306,9 +307,9 @@ void *load_blob(const char *filename)
 	size_t len;
 	int ret = utilfdt_read_err(filename, &blob, &len);
 
-	if (ret)
-		CONFIG("Couldn't open blob from \"%s\": %s", filename,
-		       strerror(ret));
+	// if (ret)
+	// 	CONFIG("Couldn't open blob from \"%s\": %s", filename,
+	// 	       strerror(ret));
 
 	vg_prepare_blob(blob, len);
 
