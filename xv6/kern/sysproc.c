@@ -2,6 +2,7 @@
 #include "trap.h"
 #include "console.h"
 #include "vm.h"
+#include "gpio2.h"
 
 #include <sys/mman.h>
 
@@ -110,4 +111,29 @@ sys_wait4()
     }
 
     return wait();
+}
+
+int
+sys_turn_on_gpio(){
+    int gpio, mode;
+
+    if (argint(0, &gpio) < 0 || argint(1, &mode))
+        return -1;
+
+    turn_on_gpio(gpio, mode);
+    set_gpio(gpio);
+
+    return 0;
+}
+
+int
+sys_turn_off_gpio(){
+    int gpio;
+
+    if (argint(0, &gpio) < 0)
+        return -1;
+
+    clear_gpio(gpio);
+    return 0;
+
 }
