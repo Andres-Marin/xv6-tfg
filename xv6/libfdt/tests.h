@@ -80,7 +80,7 @@ void cleanup(void);
 		exit(RC_BUG);				\
 	} while (0)
 
-void check_mem_rsv(void *fdt, int n, uint64_t addr, uint64_t size);
+void check_mem_rsv(void *fdt, int n, unsigned long int  addr, unsigned long int  size);
 
 void check_property(void *fdt, int nodeoffset, const char *name,
 		    unsigned int len, const void *val);
@@ -119,7 +119,7 @@ const void *check_getprop_addrrange(void *fdt, int parent, int nodeoffset,
 				    const char *name, int num);
 
 int nodename_eq(const char *s1, const char *s2);
-void vg_prepare_blob(void *fdt, size_t bufsize);
+void vg_prepare_blob(void *fdt, unsigned long bufsize);
 void *load_blob(const char *filename);
 void *load_blob_arg(int argc, char *argv[]);
 void save_blob(const char *filename, void *blob);

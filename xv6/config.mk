@@ -1,4 +1,4 @@
-RASPI := 4
+RASPI := 3
 
 ARCH := aarch64
 CROSS := aarch64-linux-gnu-

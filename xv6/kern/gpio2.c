@@ -13,6 +13,8 @@ int turn_on_gpio(int gpio, int mode){
     unsigned int registro = 0;
     int gpio_selector = gpio / REGISTER_PER_SELECTOR; 
     int gpio_number = gpio % REGISTER_PER_SELECTOR;
+
+    cprintf("gpio: %d - gpio_selector: %d - gpio_number: %d, desp: %d\n", gpio, gpio_selector, gpio_number, gpio_number*3);
     
     if (gpio_selector == 0){
         registro = get32(GPFSEL0);
@@ -22,8 +24,11 @@ int turn_on_gpio(int gpio, int mode){
     }
     else if (gpio_selector == 1){
         registro = get32(GPFSEL1);
+        cprintf("registro primero: 0x%x\n",registro);
         registro &= ~(7<<gpio_number); // limpio los bits de la gpio que quiero utilizar ahora
-        registro |= mode << gpio_number; // asigno la gpio como de salida
+        cprintf("registro segundo: 0x%x\n",registro);
+        registro |= mode << gpio_number*3; // asigno la gpio como de salida
+        cprintf("registro tercero: 0x%x\n",registro);
         put32(GPFSEL1, registro);
     }
     else if (gpio_selector == 2){
@@ -59,7 +64,12 @@ int set_gpio(int gpio){
     if (gpio > 57 || gpio < 0)
         return 1;
 
-    int gpio_number = gpio % REGISTER_PER_SELECTOR;
+    int gpio_number = gpio % 32;
+    
+    cprintf("gpio escrita: 0x%x\n", gpio_number);
+
+
+
 
     if (gpio < 32){
         put32(GPSET0, 1 << gpio_number);
@@ -77,14 +87,14 @@ int clear_gpio(int gpio){
     if (gpio > 57 || gpio < 0)
         return 1;
 
-    int gpio_number = gpio % REGISTER_PER_SELECTOR;
+    int gpio_number = gpio % 32;
 
     if (gpio < 32){
         put32(GPCLR0, 1 << gpio_number);
     }
-    else {
-        put32(GPCLR1, 1 << gpio_number);
-    }
+    // else {
+    //     put32(GPCLR1, 1 << gpio_number);
+    // }
 
     return 0;
 

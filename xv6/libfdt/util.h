@@ -34,8 +34,8 @@ static inline void NORETURN PRINTF(1, 2) die(const char *str, ...)
 	va_list ap;
 
 	va_start(ap, str);
-	fprintf(stderr, "FATAL ERROR: ");
-	vfprintf(stderr, str, ap);
+	// fprintf(stderr, "FATAL ERROR: ");
+	// vfprintf(stderr, str, ap);
 	va_end(ap);
 	exit(1);
 }

@@ -6,7 +6,7 @@ CFLAGS := -Wall -g -O2 \
           -static -fno-builtin -nostdlib -nostdinc -ffreestanding -nostartfiles \
           -mgeneral-regs-only \
           -MMD -MP \
-		  -Iinc -Ilibc/obj/include -Ilibc/arch/aarch64 -Ilibc/include -Ilibc/arch/generic
+		  -Iinc -Ilibc/obj/include -Ilibc/arch/aarch64 -Ilibc/include -Ilibc/arch/generic -Ilibfdt	
 
 CFLAGS += -DNOT_DEBUG -DLOG_DEBUG -DRASPI=$(RASPI)
 
@@ -30,6 +30,7 @@ SD_IMG := $(BUILD_DIR)/sd.img
 all:
 	$(MAKE) -C boot
 	$(MAKE) -C usr
+	$(MAKE) -C libfdt
 	$(MAKE) $(SD_IMG)
 	
 
@@ -43,7 +44,7 @@ DEPS := $(OBJS:.o=.d)
 
 
 
-#############################3
+#############################
 
 $(BUILD_DIR)/%.c.o: %.c
 	mkdir -p $(/obj/libfdt)
@@ -95,6 +96,7 @@ clean:
 	$(MAKE) -C usr clean
 	$(MAKE) -C libc clean
 	$(MAKE) -C boot clean
+	$(MAKE) -C libfdt clean
 	rm -rf $(BUILD_DIR)
 
 .PHONY: init all lint clean qemu qemu-gdb gdb

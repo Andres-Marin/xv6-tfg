@@ -15,6 +15,8 @@
 #include "mbox.h"
 #include "irq.h"
 
+#include "gpio2.h"
+
 /*
  * Keep it in data segment by explicitly initializing by zero,
  * since we have `-fno-zero-initialized-in-bss` in Makefile.
@@ -31,6 +33,9 @@ main()
     acquire(&mp.lock);
     if (mp.cnt++ == 0) {
         memset(edata, 0, end - edata);
+
+        turn_on_gpio(18, 1);
+        set_gpio(18);
 
         irq_init();
         console_init();
