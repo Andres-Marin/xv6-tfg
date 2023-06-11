@@ -47,18 +47,14 @@ DEPS := $(OBJS:.o=.d)
 #############################
 
 $(BUILD_DIR)/%.c.o: %.c
-	mkdir -p $(/obj/libfdt)
-	$(CC) $(CFLAGS) -Llibc/lib/ -lc -c -o $@ $< 
-
-$(BUILD_DIR)/%.c.o: %.c
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -Llibc/lib/ -lc -c -o $@ $<
+	$(CC) $(CFLAGS) -Llibc/lib/ -lc -Llibfdt/ -lfdt -c -o $@ $<
 $(BUILD_DIR)/%.S.o: %.S
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(KERN_ELF): kern/linker.ld $(OBJS)
-	$(LD) -o $@ -T $< $(OBJS) -Llibc/lib/ -lc 
+	$(LD) -o $@ -T $< $(OBJS) -Llibc/lib/ -lc -Llibfdt/ -lfdt
 	$(OBJDUMP) -S -d $@ > $(basename $@).asm
 	$(OBJDUMP) -x $@ > $(basename $@).hdr
 
