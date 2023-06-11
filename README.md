@@ -1,6 +1,6 @@
 # xv6-tfg
 
-Implementación de xv6 para arquitectura arm haciendo uso de device tree para la getión de las interfaces hardware de la raspberry.
+Implementación de xv6 para arquitectura arm haciendo uso de device tree para la gestión de las interfaces hardware de la raspberry.
 
 El árbol de directorios es el siguiente:
 
