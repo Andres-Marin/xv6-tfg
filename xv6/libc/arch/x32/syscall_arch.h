@@ -89,5 +89,8 @@ static __inline long __syscall6(long long n, long long a1, long long a2, long lo
 #define SYS_sched_rr_get_interval_time64 SYS_sched_rr_get_interval
 #define SYS_getrusage_time64 SYS_getrusage
 #define SYS_wait4_time64 SYS_wait4
+#define SYS_turn_on_gpio_time64 SYS_turn_on_gpio
+#define SYS_turn_off_gpio_time64 SYS_turn_off_gpio
+
 
 #define IPC_64 0

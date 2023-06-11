@@ -389,6 +389,8 @@
 #define __NR_fspick		433
 #define __NR_pidfd_open		434
 #define __NR_clone3		435
+#define __NR_turn_on_gpio 436
+#define __NR_turn_off_gpio 437
 
 #define __ARM_NR_breakpoint	0x0f0001
 #define __ARM_NR_cacheflush	0x0f0002

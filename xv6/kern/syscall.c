@@ -13,6 +13,8 @@ extern int sys_brk();
 extern int sys_mmap();
 extern int sys_wait4();
 extern int sys_yield();
+extern int sys_turn_on_gpio();
+extern int sys_turn_off_gpio();
 
 extern int sys_execve();
 
@@ -182,6 +184,12 @@ syscall1(struct trapframe *tf)
 
     case SYS_wait4:
         return sys_wait4();
+
+    case SYS_turn_on_gpio:
+        return sys_turn_on_gpio();
+
+    case SYS_turn_off_gpio:
+        return sys_turn_off_gpio();
 
         // FIXME: exit_group should kill every thread in the current thread group.
     case SYS_exit_group:
