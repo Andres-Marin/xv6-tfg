@@ -37,7 +37,7 @@
 #include "testdata.h"
 
 /* For FDT_SW_MAGIC */
-#include "../libfdt/libfdt_internal.h"
+#include "libfdt_internal.h"
 
 int verbose_test = 1;
 char *test_name;

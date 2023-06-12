@@ -171,7 +171,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-//#include <libfdt.h>
+#include <libfdt.h>
 
 #define AUX_BASE            (MMIO_BASE + 0x215000)
 
@@ -200,7 +200,9 @@ int static AUX_BASE2, AUX_UART_CLOCK2;
 
 int static AUX_REGISTERS[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
 
-//void read_uart_registers_dt(void *fdt);
+void read_uart_registers_dt(void *fdt);
+
+// uint64_t aux = AUX_MU_LSR_REG;
 
 void
 uart_putchar(int c)
@@ -233,7 +235,7 @@ uart_init()
     // sel |= 2 << 15;             /* Set alt5 for GPIO15. */
     // put32(GPFSEL1, sel);
 
-    // void *fdt = load_blob("rpi4-xv6V1.dtb"); //ESTO HACE QUE FALLE
+    // void *fdt = load_blob("rpi4-xv6V1"); //<----- ESTO HACE QUE FALLE
 
     // read_uart_registers_dt(fdt);
 
@@ -260,7 +262,7 @@ uart_init()
     /* Finally, enable transmitter and receiver. */
     put32(AUX_MU_CNTL_REG, 3);
 }
-/*
+
 void read_uart_registers_dt(void *fdt){
 
 	//DEFINICION DE PARAMETROS A UTILIZAR EN LA LECTURA DE REGISTROS
@@ -315,4 +317,4 @@ void read_uart_registers_dt(void *fdt){
 	}
 
 }
-*/
+
