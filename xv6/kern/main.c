@@ -34,8 +34,8 @@ main()
     if (mp.cnt++ == 0) {
         memset(edata, 0, end - edata);
 
-        turn_on_gpio(18, 1);
-        set_gpio(18);
+        // turn_on_gpio(18, 1);
+        // set_gpio(18);
 
         irq_init();
         console_init();

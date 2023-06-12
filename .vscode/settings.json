@@ -1,5 +1,9 @@
 {
     "files.associations": {
-        "*.in": "cpp"
+        "*.in": "cpp",
+        "syscall.h": "c",
+        "defs.h": "c",
+        "wait.h": "c",
+        "unistd.h": "c"
     }
 }

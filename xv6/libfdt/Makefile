@@ -40,4 +40,4 @@ ifneq ($(DEPTARGETS),)
 endif
 
 clean:
-	rm -f *.o libfdt.a $(BUILD_DIR)
+	rm -f *.o libfdt.a $(BUILD_DIR)/*
