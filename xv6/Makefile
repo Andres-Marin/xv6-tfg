@@ -6,7 +6,7 @@ CFLAGS := -Wall -g -O2 \
           -static -fno-builtin -nostdlib -nostdinc -ffreestanding -nostartfiles \
           -mgeneral-regs-only \
           -MMD -MP \
-		  -Iinc -Ilibc/obj/include -Ilibc/arch/aarch64 -Ilibc/include -Ilibc/arch/generic -Ilibfdt	
+		  -Iinc -Ilibc/obj/include -Ilibc/arch/aarch64 -Ilibc/include -Ilibc/arch/generic -Ilibfdt
 
 CFLAGS += -DNOT_DEBUG -DLOG_DEBUG -DRASPI=$(RASPI)
 
@@ -20,7 +20,7 @@ else
 $(error RASPI must be set to 3 or 4)
 endif
 
-SRC_DIRS := kern libfdt
+SRC_DIRS := kern
 BUILD_DIR = obj
 
 KERN_ELF := $(BUILD_DIR)/kernel8.elf
@@ -48,13 +48,13 @@ DEPS := $(OBJS:.o=.d)
 
 $(BUILD_DIR)/%.c.o: %.c
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -Llibc/lib/ -lc -Llibfdt/ -lfdt -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $<
 $(BUILD_DIR)/%.S.o: %.S
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(KERN_ELF): kern/linker.ld $(OBJS)
-	$(LD) -o $@ -T $< $(OBJS) -Llibc/lib/ -lc -Llibfdt/ -lfdt
+	$(LD) -o $@ -T $< $(OBJS) -Llibfdt/ -lfdt -Llibc/lib/ -lc
 	$(OBJDUMP) -S -d $@ > $(basename $@).asm
 	$(OBJDUMP) -x $@ > $(basename $@).hdr
 

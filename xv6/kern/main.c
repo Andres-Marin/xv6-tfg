@@ -14,6 +14,7 @@
 #include "buf.h"
 #include "mbox.h"
 #include "irq.h"
+#include "uart.h"
 
 #include "gpio2.h"
 
@@ -36,6 +37,7 @@ main()
 
         // turn_on_gpio(18, 1);
         // set_gpio(18);
+
 
         irq_init();
         console_init();

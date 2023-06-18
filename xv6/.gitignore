@@ -4,4 +4,3 @@ bin/
 .gdb_history
 .vscode/
 
-boot/*

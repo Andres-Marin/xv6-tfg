@@ -152,7 +152,7 @@ int main(int argc, char *argv[]){
 
     // test_init(argc, argv); 
 
-	void *fdt = load_blob("rpi4-xv6.dtb")	;
+	void *fdt = load_blob("rpi4-xv6.dtb");
 
 	read_uart_registers_dt(fdt);
 

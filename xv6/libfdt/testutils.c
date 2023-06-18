@@ -9,15 +9,17 @@
 #define _GNU_SOURCE /* for strsignal() in glibc.  FreeBSD has it either way */
 #endif
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <limits.h>
-#include <string.h>
-#include <errno.h>
-#include <signal.h>
-#include <unistd.h>
-#include <fcntl.h>
+#include "stdio.h"
+#include "stdlib.h"
+#include "stdint.h"
+#include "limits.h"
+#include "string.h"
+#include "errno.h"
+#include "signal.h"
+#include "unistd.h"
+#include "fcntl.h"
+
+// #include "../inc/console.h"
  
 // #ifdef NO_VALGRIND
 // static inline void VALGRIND_MAKE_MEM_UNDEFINED(void *p, size_t len)
@@ -305,14 +307,15 @@ void *load_blob(const char *filename)
 {
 	char *blob;
 	size_t len;
+	cprintf("entro 1\n");
 	int ret = utilfdt_read_err(filename, &blob, &len);
-
-	// if (ret)
-	// 	CONFIG("Couldn't open blob from \"%s\": %s", filename,
-	// 	       strerror(ret));
-
+	cprintf("salgo 1\n");
+	// // if (ret)
+	// // 	CONFIG("Couldn't open blob from \"%s\": %s", filename,
+	// // 	       strerror(ret));
+	cprintf("entro 2\n");
 	vg_prepare_blob(blob, len);
-
+	cprintf("salgo 2\n");
 	return blob;
 }
 

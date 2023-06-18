@@ -6,7 +6,9 @@ LIBFDT_archive = libfdt.a
 LIBFDT_lib = $(LIBFDT_dir)/$(LIBFDT_LIB)
 LIBFDT_include = $(addprefix $(LIBFDT_dir)/,$(LIBFDT_INCLUDES))
 LIBFDT_version = $(addprefix $(LIBFDT_dir)/,$(LIBFDT_VERSION))
-CFLAGS = -Wpointer-arith -Wcast-qual -Wnested-externs -Wstrict-prototypes -Wmissing-prototypes -Wredundant-decls -Wshadow -Wsuggest-attribute=format -Wwrite-strings
+CFLAGS = -Wpointer-arith -Wcast-qual -Wnested-externs -Wstrict-prototypes -Wmissing-prototypes \
+-Wredundant-decls -Wshadow -Wsuggest-attribute=format -Wwrite-strings -I../libc/obj/include \
+-I../libc/arch/aarch64 -I../libc/include -I../libc/arch/generic
 
 
 ifeq ($(STATIC_BUILD),1)
@@ -28,12 +30,15 @@ OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 -include $(DEPS)
 
+
+
 $(BUILD_DIR)/%.c.o: %.c
 	mkdir -p $(dir $@)
 	aarch64-linux-gnu-gcc $(CFLAGS) -L../libc/lib/ -lc -c -o $@ $<	
 
 $(LIBFDT_archive): $(OBJS)
 	aarch64-linux-gnu-ar rcs $@ $(OBJS)
+
 
 ifneq ($(DEPTARGETS),)
 -include $(LIBFDT_OBJS:%.o=$(LIBFDT_dir)/%.d)

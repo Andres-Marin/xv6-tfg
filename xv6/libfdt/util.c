@@ -7,17 +7,17 @@
  *	Pantelis Antoniou <pantelis.antoniou AT gmail.com>
  */
 
-#include <ctype.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <string.h>
-#include <assert.h>
-#include <inttypes.h>
+#include "ctype.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include "stdarg.h"
+#include "string.h"
+#include "assert.h"
+#include "inttypes.h"
 
-#include <errno.h>
-#include <fcntl.h>
-#include <unistd.h>
+#include "errno.h"
+#include "fcntl.h"
+#include "unistd.h"
 
 #include "libfdt.h"
 #include "util.h"
@@ -250,13 +250,16 @@ int utilfdt_read_err(const char *filename, char **buffp, size_t *len)
 	size_t bufsize = 1024, offset = 0;
 	int ret = 0;
 
+	cprintf("entro 1.1\n");
 	*buffp = NULL;
 	if (strcmp(filename, "-") != 0) {
+		cprintf("entro 1.1.1\n");
 		fd = open(filename, O_RDONLY);
+		cprintf("salgo 1.1.1\n");
 		if (fd < 0)
 			return errno;
 	}
-
+	cprintf("salgo 1.1\n");
 	/* Loop until we have read everything */
 	buf = xmalloc(bufsize);
 	do {

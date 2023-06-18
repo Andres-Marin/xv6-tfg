@@ -72,13 +72,13 @@
 
 
 		uart1: serial@fe215040 {
-			compatible = "brcm,bcm2835-aux-uart"; // indica el controlador o driver compatible con el dispositivo, en este caso del uart.
+			compatible = "brcm,bcm2835-aux-uart";
 			reg = <0xfe215040 0x20 0xfe215044 0x20 
 				   0xfe215048 0x20 0xfe21504c 0x20 
 				   0xfe215050 0x20 0xfe215054 0x20
 				   0xfe215058 0x20 0xfe21505c 0x20
 				   0xfe215060 0x20 0xfe215064 0x20
-				   0xfe215068 0x20>; // ver si tengo que cambiar el registro
+				   0xfe215068 0x20>;
 			interrupts = <1 29>; 
 			
 			clocks = <&aux>;
@@ -134,17 +134,10 @@
 
 	};
 
-
-	// VER SI AÑADIR A OVERRIDES Y A SYMBOLS
-
-	__overrides__ {
-		uart1 = "\0\0\01status";
-	};
-
-
 	__symbols__ {
-		rmem = "/reserved-memory";
-		soc = "/soc";
-		uart1 = "/soc/serial@fe215000";
+		clocks = "/soc/cprman@fe101000";
+		aux = "/soc/aux@fe215004";
+		uart1 = "/soc/serial@fe215040";
+		gpio = "/soc/gpio@fe200000";
 	};
 };
