@@ -1,6 +1,7 @@
 #include "base.h"
 #include "gpio.h"
 #include "uart.h"
+#include "devicetree.h"
 
 #include "arm.h"
 
@@ -61,6 +62,8 @@ uart_init()
     // sel &= ~(7 << 15);          /* Clean GPIO15. */
     // sel |= 2 << 15;             /* Set alt5 for GPIO15. */
     // put32(GPFSEL1, sel);
+
+    devicetree_init();
 
     put32(GPPUD, 0);
     delayus(5);

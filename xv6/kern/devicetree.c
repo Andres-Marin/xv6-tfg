@@ -21,7 +21,7 @@ uint64_t AUX_REGISTERS[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
 
 uint64_t GPIO_REGISTERS[18] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
-void init_devicetree(){
+void devicetree_init(){
     void *fdt = load_blob("rpi4-xv6.dtb");
 
     read_uart_registers_dt(fdt);

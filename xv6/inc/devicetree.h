@@ -1,7 +1,7 @@
 #ifndef INC_UART_H
 #define INC_UART_H
 
-void init_devicetree();
+void devicetree_init();
 
 uint64_t get_uart_register(uint64_t reg);
 uint64_t get_uart_clock();
