@@ -8,11 +8,9 @@ El árbol de directorios es el siguiente:
 
 ├── dts-dtb
 
-├── lbfdt
+├── xv6
 
-├── README.md
-
-└── xv6
+└── README.md
 
 En el directorio dts-dtb se encuentran los ficheros de código de device tree implementados, entre ellos también se encuentra el device tree que qemu utiliza y el oficial de la raspberry pi 4 usado como punto de partida.
 
