@@ -2,6 +2,7 @@
 #include "base.h"
 #include "uart.h"
 #include "devicetree.h"
+#include "devicetree_file.h"
 
 #include "arm.h"
 
@@ -10,9 +11,6 @@
 
 #define AUX_ENABLE 0
 
-// #include "../libfdt/libfdt.h"
-// #include "../libfdt/tests.h"
-// #include "../libfdt/testdata.h"
 #include <libfdt.h>
 
 uint64_t AUX_UART_CLOCK;
@@ -21,12 +19,27 @@ uint64_t AUX_REGISTERS[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
 
 uint64_t GPIO_REGISTERS[18] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
+void nodes_read(void *fdt){
+
+	int offset, node_offset = 0;
+	
+	cprintf("[0]devicetree_init: Lectura decivetree\n");
+
+	fdt_for_each_subnode(offset, fdt, 0){
+		cprintf("\tNodo %s\n", fdt_get_name(fdt, offset, 0));
+		fdt_for_each_subnode(node_offset, fdt, offset)
+			cprintf("\t\tSubnodo %s\n", fdt_get_name(fdt, node_offset, 0));
+	}
+
+}
+
 void devicetree_init(){
-    void *fdt = load_blob("rpi4-xv6.dtb");
 
-    read_uart_registers_dt(fdt);
+	nodes_read(devicetree);
 
-    read_gpios_registers_dt(fdt);
+    // read_uart_registers_dt(devicetree);
+
+    // read_gpios_registers_dt(devicetree);
 }
 
 
@@ -55,9 +68,13 @@ void read_uart_registers_dt(void *fdt){
 
 	//LECTURA DE TODOS LOS REGISTROS
 
-	offset = fdt_path_offset(fdt, "aux");
+	cprintf("entra a funcion\n");
+
+	offset = fdt_path_offset_namelen(fdt, "aux", 3);
 	fdt_simple_addr_size(fdt, offset, 0, &address, &size);
 	
+	cprintf("pasa\n");
+
     AUX_REGISTERS[AUX_ENABLE] = address;
 
 	offset = fdt_path_offset(fdt, "uart1");
@@ -79,7 +96,7 @@ void read_uart_registers_dt(void *fdt){
 
     for (int i = 0; i < 12; i++){
 
-		printf("\t%d: %x\n", i, AUX_REGISTERS[i]);
+		cprintf("\t%d: %x\n", i, AUX_REGISTERS[i]);
 	}
 
 }
@@ -107,7 +124,7 @@ void read_gpios_registers_dt(void *fdt){
 
     for (int i = 0; i < 18; i++){
 
-		printf("\t%d: %x\n", i, GPIO_REGISTERS[i]);
+		cprintf("\t%d: %x\n", i, GPIO_REGISTERS[i]);
 	}
 
 }

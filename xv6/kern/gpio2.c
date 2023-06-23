@@ -15,6 +15,7 @@ int turn_on_gpio(int gpio, int mode){
     int gpio_number = gpio % REGISTER_PER_SELECTOR;
 
     
+    
     if (gpio_selector == 0){
         registro = get32(GPFSEL0);
         registro &= ~(7<<gpio_number); // limpio los bits de la gpio que quiero utilizar ahora
@@ -59,6 +60,7 @@ int set_gpio(int gpio){
     
     if (gpio > MAX_GPIO || gpio < MIN_GPIO)
         return 1;
+
 
     int gpio_number = gpio % REGISTER_PER_GPSET_GPCLEAR;
 

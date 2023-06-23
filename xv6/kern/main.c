@@ -15,6 +15,7 @@
 #include "mbox.h"
 #include "irq.h"
 #include "uart.h"
+#include "devicetree.h"
 
 #include "gpio2.h"
 
@@ -35,17 +36,15 @@ main()
     if (mp.cnt++ == 0) {
         memset(edata, 0, end - edata);
 
-        // turn_on_gpio(18, 1);
-        // set_gpio(18);
-
-
         irq_init();
         console_init();
+        devicetree_init();
         mm_init();
         clock_init();
         proc_init();
         user_init();
         binit();
+
 
         // Tests
         mbox_test();
