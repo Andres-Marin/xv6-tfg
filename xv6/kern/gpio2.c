@@ -1,6 +1,7 @@
 #include "base.h"
 #include "gpio.h"
 #include "gpio2.h"
+#include "devicetree.h"
 
 #include "arm.h"
 
@@ -60,7 +61,6 @@ int set_gpio(int gpio){
     
     if (gpio > MAX_GPIO || gpio < MIN_GPIO)
         return 1;
-
 
     int gpio_number = gpio % REGISTER_PER_GPSET_GPCLEAR;
 

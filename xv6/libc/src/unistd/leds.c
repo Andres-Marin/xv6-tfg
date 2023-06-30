@@ -13,7 +13,7 @@ turn_on_gpio(int gpio, int mode){
 int
 turn_off_gpio(int gpio){
     
-     __syscall_cp(SYS_turn_off_gpio, gpio);
+    __syscall_cp(SYS_turn_off_gpio, gpio);
 
     return 0;
 

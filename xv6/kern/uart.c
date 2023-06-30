@@ -1,6 +1,8 @@
 #include "base.h"
 #include "gpio.h"
+// #include "gpio2.h"
 #include "uart.h"
+#include "devicetree.h"
 
 #include "arm.h"
 
